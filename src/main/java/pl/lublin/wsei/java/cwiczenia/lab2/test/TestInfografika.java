@@ -1,9 +1,9 @@
 package pl.lublin.wsei.java.cwiczenia.lab2.test;
+import pl.lublin.wsei.java.cwiczenia.lab2.Infografika;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class TestRegExp {
+
+public class TestInfografika {
     public static void main(String[] args) {
         String exItem="<item>\n" +
                 "\t\t\t<title><![CDATA[Infografika - Koniunktura gospodarcza w marcu 2022 r.]]></title>\n" +
@@ -16,11 +16,16 @@ public class TestRegExp {
                 "\t\t\t</media:content>\n" +
                 "\t\t\t<description><![CDATA[<div><img src=\"https://stat.gov.pl//gfx/portalinformacyjny/_thumbs/pl/defaultaktualnosci/5866/38/69/1/infografika_koniunktura_gospodarcza_03_2022,k1uUwl-caFOE6tCTiHtf.png\" alt=\"\" width=\"280\" height=\"212\"/></div>]]></description>\n" +
                 "\t\t</item>";
-        Pattern pat=Pattern.compile("height=\"(\\d*)");
-        Matcher m=pat.matcher(exItem);
-        if (m.find())
-            System.out.println("Znaleziono tytuł:"+m.group(1));
-        else
-            System.out.println("Nie znaleziono tytułu");
+        Infografika test=new Infografika(exItem);
+        System.out.println("Infografika:");
+        System.out.println("tytul: "+test.tytul);
+        System.out.println("adres strony: "+test.adresStrony);
+        System.out.println("adres grafiki:"+test.adresGrafika);
+        System.out.println("adres miniaturki: "+test.adresMiniaturka);
+        System.out.println("rozmiary: "+test.wysokosc+"x"+test.szerokosc);
+        System.out.println();
+
+
     }
+
 }

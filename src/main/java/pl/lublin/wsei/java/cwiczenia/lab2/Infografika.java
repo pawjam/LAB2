@@ -4,55 +4,70 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Infografika  {
+    public String tytul;
+    public String adresStrony;
+    public String adresGrafika;
+    public String szerokosc;
+    public String wysokosc;
+    public String adresMiniaturka;
     public Infografika(String text) {
         Pattern pat = Pattern.compile("<title>\\<!\\[CDATA\\[(.*)\\]\\]");
         Matcher m = pat.matcher(text);
-        String tytul;
         if (m.find()) {
             tytul= m.group(1);
         } else {
             tytul="";
         }
-        Pattern pat_adres = Pattern.compile("<title>\\<!\\[CDATA\\[(.*)\\]\\]");
-        Matcher m_adres = pat.matcher(text);
-        String adresStrony;
-        if (m_adres.find()) {
-            adresStrony= m_adres.group(1);
+        pat = Pattern.compile("<link>(.*)<\\/link>");
+        m = pat.matcher(text);
+        //String adresStrony;
+        if (m.find()) {
+            adresStrony= m.group(1);
         } else {
             adresStrony="";
         }
-        Pattern pat_grafika = Pattern.compile("<media:content url=\"(.*\\.*)\" type");
-        Matcher m_grafika = pat.matcher(text);
-        String adresGrafika;
+        pat = Pattern.compile("<media:content url=\"(.*\\.*)\" type");
+         m = pat.matcher(text);
+        //String adresGrafika;
         if (m.find()) {
-            adresGrafika= m_grafika.group(1);
+            adresGrafika= m.group(1);
         } else {
             adresGrafika="";
         }
-        Pattern pat_miniaturka = Pattern.compile("<media:thumbnail url=\"(.*\\.*)\"");
-        Matcher m_miniaturka = pat.matcher(text);
-        String adresMiniaturka;
+        pat = Pattern.compile("<media:thumbnail url=\"(.*\\.*)\"");
+        m = pat.matcher(text);
+        //String adresMiniaturka;
         if (m.find()) {
-            adresMiniaturka= m_miniaturka.group(1);
+            adresMiniaturka= m.group(1);
         } else {
             adresMiniaturka="";
         }
-        Pattern pat_szerokosc = Pattern.compile("\" width=\"(\\d*)");
-        Matcher m_szerokosc = pat.matcher(text);
-        String szerokosc;
+        pat = Pattern.compile("\" width=\"(\\d*)");
+        m = pat.matcher(text);
+        //String szerokosc;
         if (m.find()) {
-            szerokosc= m_szerokosc.group(1);
+            szerokosc= m.group(1);
         } else {
             szerokosc="";
         }
-        Pattern pat_wyskosc = Pattern.compile("\" width=\"(\\d*)");
-        Matcher m_wysokosc = pat.matcher(text);
-        String wysokosc;
+        pat = Pattern.compile("height=\"(\\d*)");
+        m = pat.matcher(text);
+
         if (m.find()) {
-            wysokosc= m_szerokosc.group(1);
+            wysokosc= m.group(1);
         } else {
             wysokosc="";
         }
 
+    }
+
+
+    public void print() {
+        System.out.println("Infografika:");
+        System.out.println("tytul: "+tytul);
+        System.out.println("adres strony: "+adresStrony);
+        System.out.println("adres grafiki:"+adresGrafika);
+        System.out.println("adres miniaturki: "+adresMiniaturka);
+        System.out.println("rozmiary: "+wysokosc+"x"+szerokosc);
     }
 }
